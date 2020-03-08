@@ -55,4 +55,20 @@ $(document).ready(function() {
 			console.log(data);
 		});
 	});
+	
+	$("#pickupend").click(function() {
+		console.log("end pickup");
+		$.get("/event/pickupend", function(data, status) {
+			console.log(status);
+			console.log(data);
+		});
+	});
+	
+	$("#pickupstart").click(function() {
+		console.log("start pickup");
+		$.get("/event/pickupstart", function(data, status) {
+			console.log(status);
+			console.log(data);
+		});
+	});
 });

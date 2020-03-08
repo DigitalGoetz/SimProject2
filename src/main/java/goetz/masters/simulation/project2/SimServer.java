@@ -51,6 +51,18 @@ public class SimServer {
 			return paymentComplete;
 		}, new JsonTransformer());
 
+		get("/event/pickupstart", (req, res) -> {
+			Event pickupStart = Event.pickupStart();
+			es.write(pickupStart);
+			return pickupStart;
+		}, new JsonTransformer());
+
+		get("/event/pickupend", (req, res) -> {
+			Event pickupComplete = Event.pickupComplete();
+			es.write(pickupComplete);
+			return pickupComplete;
+		}, new JsonTransformer());
+
 		get("/event/end", (req, res) -> {
 			Event recordingComplete = Event.recordingComplete();
 			es.write(recordingComplete);

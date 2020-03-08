@@ -32,6 +32,14 @@ public class Event {
 		return new Event("payment_complete");
 	}
 
+	public static Event pickupStart() {
+		return new Event("pickup_start");
+	}
+
+	public static Event pickupComplete() {
+		return new Event("pickup_complete");
+	}
+
 	public static Event recordingStart() {
 		return new Event("recording_start");
 	}
