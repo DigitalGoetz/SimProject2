@@ -1,3 +1,25 @@
+# startup a docker network to enables UI and database (ES) to communicate
 docker network create simnet
+
+# startup the database (ES) using a volume from the host filesystem to store its data directory
 docker run -d --name elasticsearch --network simnet -v /home/michael/esdata:/usr/share/elasticsearch/data -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.6.1
+
+# startup the UI/API server
 docker run -d --name simserver --network simnet -p 7777:7777 simserver:0.1
+
+
+Once started, the varying "times of interest" may be pulled from elasticsearch using the following record (modifying the json for which type of event we're interested in):
+curl -X POST http://localhost:9200/recording_20200308_163014/_search?size=50 -H "Content-Type: application/json" -d '{"query" : {"bool" : {"must" : [{"match" : {"type" : "pickup_start"}}]}}}' | jq . | grep -e "\"time\":" | awk '{ print $5 }'
+
+Event possibilities are:
+- arrival
+- order_start
+- order_complete
+- payment_start
+- payment_complete
+- pickup_start
+- pickup_complete
+
+Recorded details:
+- 11 Balks
+- Some times for the stations couldn't be accurately assessed due to queue delays (i.e., how long a person was "ordering" at the order station when they were unable to move forward once their order was completed.)
