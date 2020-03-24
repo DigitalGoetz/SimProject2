@@ -1,0 +1,8 @@
+
+# Using Docker I provision an Elasticsearch Document Store
+docker network create simnet
+docker run -d --name simdb --network simnet -p 9000:9200 -p 9001:9300 --memory-swappiness=0 --memory="2g" -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.3
+
+# Use the following dependencies to communicate with Elasticsearch from my scripts
+pip install requests
+pip install elasticsearch
