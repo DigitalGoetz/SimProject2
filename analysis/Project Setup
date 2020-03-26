@@ -6,3 +6,5 @@ docker run -d --name simdb --network simnet -p 9000:9200 -p 9001:9300 --memory-s
 # Use the following dependencies to communicate with Elasticsearch from my scripts
 pip install requests
 pip install elasticsearch
+pip install pandas
+pip install plotly=4.5.4

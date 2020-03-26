@@ -7,6 +7,7 @@ docker run -d --name elasticsearch --network simnet -v /home/michael/esdata:/usr
 # startup the UI/API server
 docker run -d --name simserver --network simnet -p 7777:7777 simserver:0.1
 
+# The UI can be access from localhost:7777 and each session can be recorded using the UI's buttons.
 
 Once started, the varying "times of interest" may be pulled from elasticsearch using the following record (modifying the json for which type of event we're interested in):
 curl -X POST http://localhost:9200/recording_20200308_163014/_search?size=50 -H "Content-Type: application/json" -d '{"query" : {"bool" : {"must" : [{"match" : {"type" : "pickup_start"}}]}}}' | jq . | grep -e "\"time\":" | awk '{ print $5 }'
