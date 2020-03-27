@@ -1,11 +1,10 @@
 import json
 from elasticsearch import Elasticsearch
 import numpy as np
-import plotly.express as px
-import pandas as pd
+
 
 es = Elasticsearch([{'host': 'localhost', 'port': '9000'}])
-search = es.search(index='arrivals', size=5000)
+search = es.search(index='pickups', size=5000)
 hitarray = search['hits']['hits']
 
 dataset = []
@@ -24,9 +23,7 @@ dataset_report['max'] = round(np.amax(dataset),2)
 dataset.sort()
 dataset_report['data'] = dataset
 
-print(dataset)
-
 import utils
-utils.plot(dataset, 75)
+utils.plot(dataset, 90)
 
-#print(json.dumps(dataset_report))
+print(json.dumps(dataset_report))

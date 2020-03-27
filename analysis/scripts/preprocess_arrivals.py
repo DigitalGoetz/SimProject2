@@ -7,6 +7,11 @@ import csv
 from elasticsearch import Elasticsearch
 import numpy as np
 
+def clrHidden(input):
+    if "\xef\xbb\xbf" in input:
+        input = input[3:]
+    return input
+
 es = Elasticsearch([{'host': 'localhost', 'port': '9000'}])
 es.indices.delete(index='arrivals', ignore=[400, 404])
 
@@ -20,7 +25,7 @@ for file in os.listdir("arrival"):
             if row[0] != "\xef\xbb\xbf":
                 line = "".join(row)
                 values = line.strip().split(":")
-                timevalue = datetime.time(hour=int(values[0]), minute=int(values[1]), second=int(values[2]))
+                timevalue = datetime.time(hour=int(clrHidden(values[0])), minute=int(clrHidden(values[1])), second=int(clrHidden(values[2])))
                 timestamp = datetime.datetime.combine(datetime.date.today(), timevalue)
 
                 if lastvalue is None:
@@ -46,6 +51,3 @@ for file in os.listdir("arrival"):
         #print('mean:' +str(dataset_report['mean']) + ' \tmed:' + str(dataset_report['median']) + ' \tstd:' + str(dataset_report['standard_deviation']) + ' \tmin:' + str(dataset_report['min']) + ' \tmax:' + str(dataset_report['max'])+ ' \tsrc:' + file)
         es.index(index='arrivals', body=dataset_report)
                   
-search = es.search(index='arrivals', size=5000)
-
-print(json.dumps(search))
