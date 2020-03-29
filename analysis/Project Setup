@@ -8,3 +8,4 @@ pip install requests
 pip install elasticsearch
 pip install pandas
 pip install plotly=4.5.4
+pip install scipy

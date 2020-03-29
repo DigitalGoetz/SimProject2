@@ -27,6 +27,6 @@ dataset_report['data'] = dataset
 print(dataset)
 
 import utils
-utils.plot(dataset, 75)
+utils.plot(dataset, 50, 'Arrivals')
 
 #print(json.dumps(dataset_report))
