@@ -24,6 +24,6 @@ dataset.sort()
 dataset_report['data'] = dataset
 
 import utils
-utils.plot(dataset, 50, 'Pickups')
+utils.plot(dataset, 45, 'Pickups')
 
 #print(json.dumps(dataset_report))

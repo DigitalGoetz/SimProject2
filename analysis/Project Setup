@@ -9,3 +9,9 @@ pip install elasticsearch
 pip install pandas
 pip install plotly=4.5.4
 pip install scipy
+
+
+# Once the above Elasticsearch container has completed initialized, the event indices can be loaded with observational data using the "preprocessing*" python scripts within the "scripts" directory.  
+IMPORTANT!: These scripts were intended to be run from within the "analysis" directory!  I was too lazy to make them smart enough to locate their respective data set files!
+
+After each preprocess script is run, their respective processing (process*.py) can be run to obtain additional data / plots for that events combined data set.

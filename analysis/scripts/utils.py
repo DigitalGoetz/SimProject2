@@ -23,21 +23,21 @@ def getLogNormalPdf(dataset, nbins, bins):
     sigma = math.sqrt(sum / len(dataset))
     
     x = np.linspace(min(bins), max(bins), nbins)
-    #print('LGN: shape=' + str(mu) + ", scale=" + str(sigma) )
+    print('LGN: mu=' + str(mu) + ", sigma=" + str(sigma) )
     pdf = (np.exp(-(np.log(x) - mu)**2 / (2 * sigma**2)) / ( x * sigma * np.sqrt(2 * np.pi)))
     return (x, pdf)
 
 def getGammaPdf(dataset, nbins, bins):
     shape, loc, scale = gamma.fit(dataset, floc=0)
     x = np.linspace(min(bins), max(bins), nbins)
-    #print('GAM: shape=' + str(shape) + ', loc=' + str(loc) + ", scale=" + str(scale) )
+    print('GAM: shape=' + str(shape) + ', loc=' + str(loc) + ", scale=" + str(scale) )
     pdf = gamma.pdf(x, shape, loc, scale)
     return (x, pdf)
 
 def getExpoPdf(dataset, nbins, bins):
     loc, scale = expon.fit(dataset, floc=0)
     x = np.linspace(min(bins), max(bins), nbins)
-    #print('EXP: loc=' + str(loc) + ", scale=" + str(scale) )
+    print('EXP: loc=' + str(loc) + ", scale=" + str(scale) )
     pdf = expon.pdf(x,loc, scale)
     return (x, pdf)
 
@@ -45,7 +45,7 @@ def getWeibullPdf(dataset, nbins, bins):
     c = 1.5
     shape, loc, scale = weibull_min.fit(dataset, floc=0)
     x = np.linspace(min(bins), max(bins), nbins)
-    #print('EXP: loc=' + str(loc) + ", scale=" + str(scale) )
+    print('WEI: shape=' + str(shape) + ', loc=' + str(loc) + ", scale=" + str(scale) )
     pdf = weibull_min.pdf(x, shape, loc, scale)
     return (x, pdf)    
 
